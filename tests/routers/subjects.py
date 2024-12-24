@@ -1,9 +1,16 @@
 import uuid
 from fastapi import APIRouter, Depends, HTTPException
 from sqlalchemy.orm import Session
-from app.models import Subject as models
-from app.schemas import subject as schemas 
-from app.core.database import SessionLocal
+from models import subjects as models
+from schemas import subject as schemas 
+from sqlalchemy import create_engine
+from sqlalchemy.orm import sessionmaker, declarative_base
+
+SQLALCHEMY_DATABASE_URL = "postgresql://postgres:admin@postgres:5432/sample_db"
+
+engine = create_engine(SQLALCHEMY_DATABASE_URL)
+SessionLocal = sessionmaker(autocommit=False, autoflush=False, bind=engine)
+Base = declarative_base()
 
 router = APIRouter()
 
