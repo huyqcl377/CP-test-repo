@@ -1,5 +1,6 @@
 from pydantic import BaseModel
 from datetime import date
+import uuid
 
 class StudentBase(BaseModel):
     full_name: str
@@ -10,7 +11,7 @@ class StudentCreate(StudentBase):
     pass
 
 class Student(StudentBase):
-    id: int
+    id: uuid.UUID 
 
     class Config:
         from_attributes = True
